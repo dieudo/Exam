@@ -1,0 +1,373 @@
+---
+title: "Won Clean"
+author: "Dieudonne"
+date: "1/26/2018"
+output: pdf_document
+---
+
+#W1.
+
+###i)
+
+###False
+
+variables can be uncorrelated but dependent
+
+A continuous random variable X has a uniform distribution, denoted U(-1, 1), so its probability density function is:
+
+$$f(x)=\frac{1}{1-(-1)} =\frac{1}{2};\quad -1<x<1$$
+
+Let $$Y=X^2$$  be another random variable.
+Clearly $X$ and $Y$ are not independents: 
+
+***if you know X, you also know Y.  And if you know Y, you know the absolute value of X.***
+
+X and Y are uncorrelated if the covariance=0
+
+let's compute the covariance.
+
+$$cov(X,Y)=E(XY)-E(X)E(Y)$$
+Since the X is uniform between[-1,1] ,its expectation  
+$$E(X)=\frac{1}{2}(a+b)$$ with a=-1 and b=1  is =0
+
+$$E(X)=0$$
+
+The covariance is reduced then to 
+$$Cov(X,Y) = E(XY) - E(X)E(Y) = E(X^3) - 0*E(Y) = E(X^3)\quad since\quad Y=X^2$$
+     
+$$But\quad E(X^3)=0$$
+  
+  because the distribution of X is symmetric around zero.  Thus
+  the correlation $$\rho(X,Y) = \frac{Cov(X,Y)}{Sd_{X}Sd_{Y}} = 0$$.
+  We have a situation where the variables are not independent, yet
+  don't have (linear) correlation ($\rho(X,Y) = 0$)
+
+
+###ii)
+
+###True
+
+if(Y,X) has a bi-variate normal distribution,X has to be a normal distribution
+
+***proof***
+
+Let U and V be two independent normal random variables, and consider two new random variables X and Y of the form
+$$X=aU+bV$$
+$$Y= cU+dV$$
+where $a,b,c,d,$ are some scalars. Each one of the random variables $X$ and $Y$ is normal, since it is a linear function of independent normal random variable.
+Furthermore, because $X$ and $Y$ are linear functions of the same two independent normal random variables, their joint PDF takes a special form, known as the bi-variate normal distribution.
+
+###iii)
+If the data come from a multivariate normal distribution, then will the Chi Square q-q plot
+show an upward curve?
+
+###False
+
+Not necessarily,it could be upward and ***bended*** showing violation of multinormality
+
+***it must  be a straight line*** to maintain multivariate normality 
+
+###iv)
+
+If a 95% confidence interval is stated as $-1.4 < \mu_{1}-\mu_{2}< -.2$, then can we state with 95%
+confidence that $\mu_{1}$is somewhere between .2 and 1.4 units smaller than $\mu_{2}$?
+
+###True
+***Proof***
+
+here $\mu_{1}$ represent the mean of population 1
+and $\mu_{2}$ represent the mean of population 2
+
+We know that:
+
+a-If the two confidence intervals do not overlap, we can conclude that there is a statistically significant difference in the two population values at the given level of confidence; or alternatively
+
+b-If the confidence interval for the difference does not contain zero, we can conclude that there is a statistically significant difference in the two population values at the given level of confidence.
+
+Our case fit into b- since the difference is between 2 negative numbers([-1.4,-0.2]).
+
+So We can state with 95%
+confidence that $\mu_{1}$is somewhere between .2 and 1.4 units smaller than $\mu_{2}$(because it is statistically significant)
+
+
+
+
+#W2.
+
+###i)
+
+We can find $\alpha$ by the likelihood estimation
+
+
+***Below I am changing the variable for easy proof***
+
+let $$\lambda=\frac{1}{\alpha}$$
+
+we have n terms iid sequences ${X}$ of random variables having exponential distributions
+
+$f_{X}(x)=\lambda e^{-\lambda x}$
+
+The likelihood function
+
+$$L(\lambda;x_{1},...,x_{n})=\lambda^{n}exp(-\lambda \sum_{j=1}^{n} x_{j})\quad  ";" in\ here\ means"|"$$
+
+This function help us measure the fitness of the parameter $\lambda$ for the population distribution.
+
+I derive this from the fact that the variables are iid with PDFs exponential
+so 
+$$L(\lambda;x_{1},x_{2},...x_{n})=\prod_{i=1}^{n} f_{X}(x_{j};\lambda)$$
+
+$$=\prod_{j=1}^{n} \lambda exp(-\lambda x_{j})$$
+
+$$L(\lambda;x_{1},...,x_{n})=\lambda^{n}exp(-\lambda \sum_{j=1}^{n} x_{j})$$
+
+To find the estimator,I compute the derivative of the log-likelihood (because it is easier than the likelihood) with  respect to $\lambda$ and equal to zero
+after manual calculation I find
+the estimator $$\lambda=\frac{n}{\sum{x_{j}}}$$
+
+
+but since in the beginning I posed 
+$$\alpha=\frac{1}{\lambda}$$
+
+the estimator $$\alpha\hat{}=\frac{\sum_{j=1}^n{x_{j}}}{n}$$
+
+***which is the sample mean***
+
+###ii)
+Let the random variable X  have the exponential distribution with probability density  function
+
+$f_{X}(x)=\frac{1}{\alpha}e^{-x/\alpha}$  with x>0.
+
+The transformation  $Y=g(X)=X^{1/\beta}$is a 1-1 transformation from
+
+$X=\{x|x>0\}$ to $Y=\{y|y>0\}$ with inverse 
+
+$X=g^{-1}(Y)=Y^{1/\beta}$
+
+and Jacobian
+
+$$\frac{dX}{dY}=\beta Y^{\beta-1}.$$
+
+
+By the transformation rule we have
+$$f_{Y}(y)=f_X(g^-1(y))|\frac{dx}{dy}|$$
+$$=\frac{1}{\alpha}\beta y^{\beta-1}e^{-y^\beta/\alpha}$$
+
+$$=\frac{\beta}{\alpha}y^{\beta-1}e^{-y^\beta/\alpha}$$ $$y>0$$
+
+***which is the probability density function of a Weibull random variable***
+
+###iii)
+###Maximum Likelihood Estimation (MLE)
+
+Let x1,x2,...xn be a random sample of size n drawn from a population with probability
+density function f(x,$\lambda$) where$\lambda=(\beta,\alpha)$ is an unknown vector of parameters, so that the likelihood function is defined by
+
+$$L=f((\beta,\alpha))=\prod_{i}f(x_{i},\lambda)$$    (1)
+
+The maximum likelihood of $\lambda=(\beta,\alpha)$, maximizes L or equivalently, the logarithm of L when 
+$$\frac{dlnL}{d\lambda}=0.$$
+Using the weibull PDFs,its likelihood function is given as :
+
+$$L(x_{1},x_{2},....x_{n};\beta,\alpha)=\prod_{i}^{n}(\frac{\beta}{\alpha})(\frac{x_{i}}{\alpha})^{\beta-1}exp[-(\frac{x_{i}}{\alpha})^\beta]$$
+$$=(\frac{\beta}{\alpha})(\frac{x_{i}}{\alpha})^{n\beta-n}\sum_{i}^{n}x_{i}^{(\beta-1)}exp[-\sum_{i}^{n}(\frac{x_{i}}{\alpha}^\beta)$$
+Taking the natural logarithm of both sides
+
+$$lnL = nln(\frac{\beta}{\alpha})+(\beta-1)\sum_{i}^{n}x_{i}-ln(\alpha^{\beta-1})-\sum_{i}^{n}(\frac{x_{i}}{\alpha})^\beta$$
+using partial differentiation  with rest to $\beta$ and $\alpha$ in turn and equating to zero,I get the estimating equations as follows
+$$\frac{\partial \ln L}{\partial \beta}=\frac{n}{\beta}+\sum_{i}^{n}ln x_{i}-\frac{1}{\alpha}\sum_{i}^{n}x_{i}^\beta ln x_{i}=0 \quad (a)$$
+and $$\frac{ \partial}{\partial\alpha} ln L=-\frac{n}{\alpha}+\frac{1}{\alpha^2}\sum_{i=1}^{n}x_{i}^\beta=0\quad(b)$$
+
+From b we obtain an estimator of $\alpha$ as 
+$$\alpha\hat{}_{mle}=\frac{1}{n}\sum_{i=1}^{n}x_{i}^{\beta\hat{}}\quad (c)$$
+
+By substituting $(c)$ into $(a)$ we get:
+$$\frac{1}{\beta}+\frac{1}{n}\sum_{i}^{n} ln x_{i}-\frac{\sum_{i=1}^{n}x_{i}^\beta lnx}{\sum_{i=1}^{n}x_{i}^\beta}=0\quad (d)$$
+
+
+$(d)$ is solved to obtain the estimate of $\beta$ by using Newton-Raphson  method or other numerical procedure because $(d)$ does not have a closed form solution.
+
+When $\beta\hat{}_{mle}$ is obtained, the value of $\alpha\hat{}$ follows from $(c)$.
+
+
+###Newton-Raphson Method
+
+Let f(x) be a well-behaved function, and let r be a root of the equation f(x)=0. We start with an estimate $x_{0}$ of r From $x_{0}$, we produce an improved we hope to estimate $x_{1}$. 
+From $x_{1}$, we produce a new estimate $x_{2}.$ From $x_{2}$, we produce a new estimate $x_{3}.$ We go on until we are close enough to r or until it becomes clear that we are getting nowhere.
+The above general style of proceeding is called iterative. 
+
+Of the many iterative(or numerical) root-finding procedures, the Newton-Raphson method, with its combination of simplicity and power, is the most widely used:
+
+Let $x_{0}$ be a good estimate of r and let $r= x_{0}+h$.
+
+Since the true root is r, and $h=r-x_{0}$,the number h measures how far the estimate$x_{0}$ is from the truth.
+
+Since h is small,we can use the linear (tangent line) approximation to conclude that
+
+$$0=f(r)=f(x_{0}+h)\approx f(x_{0})+h f^{'}(x_{0})$$,
+and
+therefore ,unless $f^{'}(x_{0})$ is close to zero it follows that
+$$h\approx-\frac{f(x_{0})}{f^{'}(x_{0})}$$
+$$r=x_{0}+h\approx x_{0}-\frac{f(x_{0})}{f{'}(x_{0})}$$
+
+Our new improved estimate $x_{1}$ of r is therefore given by
+$$x_{1} = x_{0}-\frac{f(x_{0})}{f^{'}(x_{0})}$$
+The next estimate $x_{2}$ is obtained from $x_{1}$ in exactly the same way as $x_{1}$ was obtained from $x_{0}:$
+$$x_{2} = x_{1}-\frac{f(x_{1})}{f^{'}(x_{1})}$$
+Continue in this way. 
+If $x_{n}$ is the current estimate, then the next estimate
+$x_{n+1}$ is given by 
+
+
+$$x_{n+1} = x_{n}-\frac{f(x_{n})}{f^{'}(x_{n})}$$
+
+
+#W3.
+
+
+###i)
+***Entropy***
+This measure is roughly speaking the logarithm of the number of typical values that the variable(situation) can take
+
+Since we have 13 unknown balls that can be odd each or normal 
+we have 2* 13 cases =26  
+Entropy of the system $$H_{S}=log(2*13)=log(26)$$
+
+What is not known through the deviating ball is which one between 13 balls so we have 13 cases
+
+Entropy of the deviating ball$$H_{b}=log(13)$$
+
+###ii) 
+ideal measurements we arranged to get log 3 information(equally probables outcomes) and since 3 log 3 is greater than log13. so 3 measurements could work!
+
+###iii)
+ 
+I split the balls into 4,4 and 5 aside 
+and I put the 4 balls each on each scale
+if there are the same then the 5 remaining have the odd ball
+
+I split into 2 and 3 and check the 3 with 3 normal ones from the correct 8 balls.if the same so the odd ball is between the 2 remaining balls 
+so with 1 more measure I know the odd ball 
+so in total here 3 measurements.
+
+if the 4 each in the beginning are different 
+I take the heavier part and divided into 2 and check
+if there are different  I proceed to determine to odd with my next measurement so here to 3 measurements are enough.
+
+
+If the 2 balls are equals in the last part,then the first disregard 4 parts had the odd ball(which was actually lighter)
+I take back those 4 balls and decide them into 2 balls each and do one more step to determine the odd ball.In this case I have done 4 measurements
+
+BUT SINCE I HAVE 2/3 OF A CHANCE OF HEADING TO 3 measurements and 1/3 HEADING TO 4 ,ideally 3 measurements are enough
+
+##W4
+
+###i) 
+
+Let N be the number of nodes in the network
+The central node has **N-1** edges connected to it since it is a star network
+any other node has 1 edge connected to it so  the degree is **1** for those nodes
+
+***using R for visual representation we have***
+
+igraph is a network science tool for manipulating graphs
+
+###Number of nodes =100  so degree distribution is 99 for first node and 1 for other nodes
+
+```{r,message=FALSE,warning=FALSE}
+library(pander)
+library(knitr) # a nice printing library in R 
+library(igraph)# here we load the library
+net <- make_star(100)# we create a star network with 100 nodes
+plot(net, vertex.size=5,vertex.label=NA)#We plot the network with node size 5 without labeling the nodes numbers
+deg <- degree(net, mode="all") #The degree distribution of all nodes  and we assign it to deg variable
+pander(deg,caption="Degree distribution")  #Here  print the degree
+```
+
+
+###ii)
+Average degree of the graph
+
+We have N-1 degree for 1 node and N-1 1 degree so the average is 
+
+$<k>=\frac{N-1+N-1}{N}=\frac{2N-2}{N}$
+
+So for $N->\infty$  $<k>=2$
+
+
+***Using R in our case of 100 nodes we have***
+
+We use the mean function in R  which give us the average on the variable **deg**
+
+```{r,warning=FALSE,message=FALSE}
+
+Average_degree=mean(deg)
+kable(paste("Average degree=",Average_degree))# kable function allows a nicer print out
+
+```
+
+***The result match the formula***
+
+$\frac{2*100-2}{100}=\frac{198}{100}$
+
+###iii)
+
+For each node:
+Let n be the number of its neighbor nodes
+Let m be the number of links among the k neighbors
+Calculate c = m/(n choose 2)
+Then C= <c> (the average of c)
+C indicates the average probability for two of one's friends to be friends too
+There is no clustering in this type of architecture since we have one central node and N-1 nodes around =>m=0
+Clustering coefficient is **zero**
+
+$C=0$
+
+###iv)
+
+In this network we have 2 degrees only **1** and **N-1** 
+k could be chosen between N-1 edges since we have N-1 edges in this type of graph.
+If we choose k=1, we find surely we find a node with degree 1 along a randomly pick edge
+if we pick 2,3,....N-2 ,nothing could be found.
+if we pick N-1 we find 1 node the central node
+
+so $$q_{k}=\frac{1+1}{N-1}=\frac{2}{N-1}$$
+
+
+if $N->\infty$ ,$q_{k}=0$
+
+
+###v)
+
+
+
+
+The Pearson's correlation coefficient of node degrees across links
+
+$$r = \frac{cov(X,Y)}{\sigma_{X}\sigma_{Y}}$$
+
+X: degree of start node (in / out)
+
+Y: degree of end node (in / out)
+
+In our case here when we examine every pair of linked nodes we have one node has 1 degree and the other node(central node) has N-1 ,so this is ***a perfect disassortative network***
+where very high degree(N-1) is linked to low degree(1) so we have 
+$$r=-1$$
+
+
+
+
+
+***We can use R to compute it using igraph function: "assortativity_degree()"*** 
+
+This function compute the degree correlation of the network variable we define above ***net***
+
+
+```{r,warning=FALSE,message=FALSE}
+
+Degree_Correlation=assortativity_degree(net,directed = F)
+kable(paste("degree correlation = ",Degree_Correlation))# Degree correlation
+
+```
+
+#W5.
